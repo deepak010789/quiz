@@ -5,7 +5,7 @@ from textarea.models import TextAreaModel
 
 class TextAreaForm(forms.ModelForm):
 #    describe = forms.CharField(label='Describe', widget=forms.Textarea())
-    describe = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    describe = forms.CharField(widget=TinyMCE(attrs={'cols': 30, 'rows': 10}))
 
     class Meta:
         model = TextAreaModel
