@@ -13,8 +13,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 from os.path import join, dirname, realpath
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-MEDIA_URL='/media/'
+#MEDIA_URL='/media/'
+
 MEDIA_ROOT = join(BASE_DIR, "media")
+MEDIA_URL = join(BASE_DIR, "media/")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -87,13 +89,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+"django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages"
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = join(BASE_DIR, "static/")
 STATIC_ROOT = join(BASE_DIR, "static")
-
 TINYMCE_SPELLCHECKER = True
 TINYMCE_COMPRESSOR = True
 TINYMCE_DEFAULT_CONFIG = {

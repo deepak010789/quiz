@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from textarea.models import TextAreaModel
 from textarea.forms import TextAreaForm
 
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+
 def index(request):
 #    return HttpResponse("Hello, world. You're at the polls index.")
     if request.method == 'POST':
@@ -12,4 +15,4 @@ def index(request):
 	    form.save()
     else:
         form = TextAreaForm()
-    return render(request, 'name.html', {'form': form})
+    return render_to_response('name.html', {'form': form}, context_instance=RequestContext(request))

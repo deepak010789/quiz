@@ -1,10 +1,14 @@
-{% load tinymce_tags %}
 <html>
 <head>
+<script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tiny_mce.js"></script>
     {{ form.media }}
 </head>
-<form action="." method="post">{% csrf_token %}
-    {{ form }}
-    <input type="submit" value="OK">
-</form>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit" value="Submit" />
+    </form>
+
 </html>
