@@ -1,14 +1,27 @@
+<!DOCTYPE html
 <html>
 <head>
 <script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tiny_mce.js"></script>
-    {{ form.media }}
+    <script type="text/javascript">
+    tinymce.init({
+        mode: "textareas",
+    	theme : "advanced",
+	plugins: [
+		"eqneditor advlist autolink lists link image charmap print preview anchor",
+		"searchreplace visualblocks code fullscreen",
+		"insertdatetime media table contextmenu paste" ],
+    	toolbar: "undo redo | eqneditor link image | styleselect | bold italic | bullist numlist outdent indent ",
+	plugins : "spellchecker",
+    	height : 550,
+    	width : 750
+    });
+    </script>
 </head>
-
+<body>
     <form action="" method="post">
         {% csrf_token %}
         {{ form }}
-
         <input type="submit" value="Submit" />
     </form>
-
+</body>
 </html>
