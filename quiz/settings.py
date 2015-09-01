@@ -100,28 +100,38 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+STATICFILES_DIRS = (
+)
 
 STATIC_URL = "/static/"
 STATIC_ROOT = join(BASE_DIR, "static")
-TINYMCE_SPELLCHECKER = True
-TINYMCE_COMPRESSOR = True
-TINYMCE_JS_URL = os.path.join(STATIC_ROOT, "static/tiny_mce/tiny_mce.js")
-TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "static/tiny_mce")
-TINYMCE_JS_URL = os.path.join(STATIC_ROOT,'static/tiny_mce/tiny_mce_src.js')
-TINYMCE_DEFAULT_CONFIG = {
-    "relative_urls": "false",
-    "theme": "modern",
-    "toolbar1" : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    "toolbar2" : "print preview media | forecolor backcolor emoticons",
-    "theme_advanced_buttons1": "formatselect,bold,italic,underline,link,unlink,bullist,undo,code,image",
-    "theme_advanced_buttons2": "",
-    "theme_advanced_buttons3": "",
-    "plugins": ["advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons template paste textcolor colorpicker textpattern imagetools"
-	],
-    "height": "550px",
-    "width": "750px",
-}
+#STATICFILES_DIRS = (
+#    "/home/hadoolytics-deepak/workspace/tinymce/quiz/quiz/static/",
+#)
+
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+)
+#TINYMCE_SPELLCHECKER = True
+#TINYMCE_COMPRESSOR = True
+#TINYMCE_JS_URL = os.path.join(STATIC_ROOT, "static/tiny_mce/tiny_mce.js")
+#TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "static/tiny_mce")
+#TINYMCE_JS_URL = os.path.join(STATIC_ROOT,'static/tiny_mce/tiny_mce_src.js')
+#TINYMCE_DEFAULT_CONFIG = {
+#    "relative_urls": "false",
+#    "theme": "modern",
+#    "toolbar1" : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+#    "toolbar2" : "print preview media | forecolor backcolor emoticons",
+#    "theme_advanced_buttons1": "formatselect,bold,italic,underline,link,unlink,bullist,undo,code,image",
+#    "theme_advanced_buttons2": "",
+#    "theme_advanced_buttons3": "",
+#    "plugins": ["advlist autolink lists link image charmap print preview hr anchor pagebreak",
+#        "searchreplace wordcount visualblocks visualchars code fullscreen",
+#        "insertdatetime media nonbreaking save table contextmenu directionality",
+#        "emoticons template paste textcolor colorpicker textpattern imagetools"
+#	],
+#    "height": "550px",
+#    "width": "750px",
+#}
 
