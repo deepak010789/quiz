@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
-from textarea.models import TextAreaModel
+from textarea.models import TextAreaModel, ImageURLModel
 from django.contrib import admin
 
 class TextAreaForm(forms.ModelForm):
@@ -11,6 +11,12 @@ class TextAreaForm(forms.ModelForm):
 #        js = ('tiny_mce.js','tiny_mce_src.js',)
     class Meta:
         model = TextAreaModel
+
+class NameForm(forms.ModelForm):
+    source = forms.ImageField(required=False)
+
+    class Meta:
+        model = ImageURLModel
 
 #class TextAreaAdmin(admin.ModelAdmin):
 #    form = TextAreaForm

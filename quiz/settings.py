@@ -16,9 +16,10 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 #os.path.dirname(os.path.dirname(__file__))
 
-#MEDIA_ROOT = join(BASE_DIR, "media")
-#MEDIA_URL = "/media/"
-#ADMIN_MEDIA_PREFIX = '/media/admin/'
+MEDIA_ROOT = join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+print MEDIA_ROOT, MEDIA_URL
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 SECRET_KEY = 'mne(g9637h$@lbl@d!4#xg8ppkhbe^!d*x&)^c2tsix9p0gue('
 

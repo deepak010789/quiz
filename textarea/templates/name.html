@@ -23,7 +23,7 @@
     content_css: '{{ STATIC_URL }}django_tinymce/mathquill.css',
 
     file_browser_callback: function(field_name, url, type, win) {
-        if(type=='image') $('#my_form input').click();
+        if(type=='image') $('#my_form input').click(); 
     },
 
     relative_urls: false,
@@ -35,20 +35,48 @@
     paste_as_text: true,
 });
   </script>
+  <script type="text/javascript">
+//$().ready(function () {
+//    $("#myTinymce").children().find("#id_describe_ifr").ready(function () { 
+//	alert('123');
+//	alert($('body').html());
+//        $(this, frames['#id_describe_ifr'].document);
+//    });
+//});
+
+$().ready(function () {
+    var id = $("#myTinymce").children().find("#id_describe_ifr").attr("id");
+    alert(id);
+    var $x = document.getElementById(id).contentDocument;
+//    alert($x);
+//    var x = $('body').val();
+//    alert(x);
+//    if (y.document)y = y.document;
+//    y.body.style.backgroundColor = "red";
+
+//  alert( $('div#mceu_15').focus().attr('id') );
+//   $("#myTinymce").children().find("#id_describe_ifr").load(function(){
+//        alert('asd');
+//        var b = $(this).contents().find('body').html();
+//        alert(b);
+//    });
+});
+
+  </script>
   </head>
   <body>
-    <textarea id="my_editor"></textarea>
+<!--    <textarea id="my_editor"></textarea>  -->
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
-    <form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
-    <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
+    <form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">{% csrf_token %}
+      <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
     </form>
 
-<!--
-    <form action="" method="post">
+
+    <form id="myTinymce" action="" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit" />
     </form>
--->
+
   </body>
 </html>
