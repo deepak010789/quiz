@@ -51,6 +51,10 @@ def upload(request):
 #      print tmp_file, "--------"
 #      print tmp_file.url()
 #      print image.get_absolute_url()
-      return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s').closest('.mce-window').find('.mce-primary').click();</script>" % image_path)
+      return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox').val('%s');</script>" % image_path) #.val('%s').closest('.mce-window').find('.mce-primary').click()
     print "Final Return"
     return HttpResponse("<script>alert('%s');</script>" % escapejs('\n'.join([v[0] for k, v in form.errors.items()])))
+
+def ondrop(request):
+    print "ondropeddddd"
+    return HttpResponse("<script>alert('123');</script>")

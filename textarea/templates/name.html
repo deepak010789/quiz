@@ -17,8 +17,10 @@
     force_br_newlines : true,
     menubar:false,
     statusbar: false,
-    plugins : "advlist, autolink, lists, link, image, charmap, print, preview, anchor, fullscreen, media, table, contextmenu, autoresize, equationeditor",
+    plugins : "advlist, autolink, lists, link, image, charmap, print, preview, anchor, fullscreen, media, table, contextmenu, autoresize, paste, equationeditor",
     toolbar: "undo, redo, copy, |, bold italic, underline, |, bullist, numlist, |, superscript, subscript, |, charmap, equationeditor, |, table, link, image",
+    image_advtab: true,
+    paste_data_images: true,
     theme_advanced_buttons1: "image",
     content_css: '{{ STATIC_URL }}django_tinymce/mathquill.css',
 
@@ -33,33 +35,28 @@
     autoresize_max_height: 400, 
     browser_spellcheck : true, 
     paste_as_text: true,
-});
-  </script>
-  <script type="text/javascript">
-//$().ready(function () {
-//    $("#myTinymce").children().find("#id_describe_ifr").ready(function () { 
-//	alert('123');
-//	alert($('body').html());
-//        $(this, frames['#id_describe_ifr'].document);
-//    });
-//});
+    setup: function(editor) {
+/*
+    editor.on('dragenter', function (e){
+      e.stopPropagation();
+      e.preventDefault();
+      $(this).css('border', '2px solid #0B85A1');
+    });
+    editor.on('dragover', function (e){
+      e.stopPropagation();
+      e.preventDefault();
+    });
 
-$().ready(function () {
-    var id = $("#myTinymce").children().find("#id_describe_ifr").attr("id");
-    alert(id);
-    var $x = document.getElementById(id).contentDocument;
-//    alert($x);
-//    var x = $('body').val();
-//    alert(x);
-//    if (y.document)y = y.document;
-//    y.body.style.backgroundColor = "red";
-
-//  alert( $('div#mceu_15').focus().attr('id') );
-//   $("#myTinymce").children().find("#id_describe_ifr").load(function(){
-//        alert('asd');
-//        var b = $(this).contents().find('body').html();
-//        alert(b);
-//    });
+    editor.on('drop', function(e) {
+      $.ajax({
+        type: 'GET',
+        url: '/ondrop/',
+        success: function(e) {
+        }
+      }); 
+    });
+*/
+    }
 });
 
   </script>
