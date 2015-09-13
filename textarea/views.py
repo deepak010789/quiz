@@ -10,16 +10,33 @@ from django.forms import ModelForm
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import os
+from django.conf import settings
+print settings.MEDIA_URL
 
 def index(request):
 #    return HttpResponse("Hello, world. You're at the polls index.")
     if request.method == 'POST':
         form = TextAreaForm(request.POST)
-	print form
-	print '---------'
+#	raw = request.POST['describe'].split("\"") #print form
+#	data = raw[1]
+#	data  = data.split(",")[1]
+#	print data
+#	url = "/home/hadoolytics-deepak/workspace/tinymce/quiz/quiz/media/photos/item.jpg" #str(settings.MEDIA_URL)+"photos/item.jpg"
+#	print url
+#	file = open(url,"wb")
+#	file.write(data.decode('base64'))
+#	raw[1] = url
+#	print "--------------", raw
+#	final = ""
+#	for item in raw:
+#	    final = final+item
+#	post = request.POST.copy()
+#	post['describe']=final
+#	print post
+#	print '----fawbve-----'
         if form.is_valid():
 	    print "valid hai"
-	    form.save()
+	    form.save() #post
     else:
         form = TextAreaForm()
     return render_to_response('name.html', {'form': form}, context_instance=RequestContext(request))
@@ -57,4 +74,5 @@ def upload(request):
 
 def ondrop(request):
     print "ondropeddddd"
+    print request
     return HttpResponse("<script>alert('123');</script>")

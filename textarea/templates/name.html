@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>TinyMCE Example</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tinymce.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}django_tinymce/mathquill.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tinymce.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/plugins/imagetools/plugin.min.js"></script> 
     <script type="text/javascript" src="{{ STATIC_URL }}django_tinymce/init_tinymce.js"></script>
   <script type="text/javascript">
     tinymce.PluginManager.load('equationeditor', '{{ STATIC_URL }}django_tinymce/plugin.min.js');
@@ -17,34 +19,64 @@
     force_br_newlines : true,
     menubar:false,
     statusbar: false,
-    plugins : "advlist, autolink, lists, link, image, charmap, print, preview, anchor, fullscreen, media, table, contextmenu, autoresize, paste, equationeditor",
+    plugins : "advlist, autolink, lists, link, image, charmap, print, preview, anchor, fullscreen, media, table, contextmenu, autoresize, paste, equationeditor, imagetools", 
     toolbar: "undo, redo, copy, |, bold italic, underline, |, bullist, numlist, |, superscript, subscript, |, charmap, equationeditor, |, table, link, image",
-//    image_advtab: true,
+    image_advtab: true,
     paste_data_images: true,
     theme_advanced_buttons1: "image",
     content_css: '{{ STATIC_URL }}django_tinymce/mathquill.css',
-
+    add_unload_trigger: false,
     file_browser_callback: function(field_name, url, type, win) {
         if(type=='image') $('#my_form input').click(); 
+	console.log("yeh bekar me call ho raha hai");
     },
-
-    relative_urls: false,
-    remove_script_host: false,
-    convert_urls: true, 
+    document_base_url: "http://localhost:8001/",
+    relative_urls: true,
+//    remove_script_host: true,
+//    convert_urls: false, 
+//    fix_list_elements: false,
     height: 50,         
-    autoresize_max_height: 400, 
+//    autoresize_max_height: 400, 
     browser_spellcheck : true, 
     paste_as_text: true,
-    setup: function(editor) {
-        //editor.on('getDoc',function (args){
-	//console.log(args);
-	//});
-editor.selection.getContent();
+/*    images_upload_handler: function (blobInfo, success, failure) {
+        console.log(blobInfo.blob());console.log(blobInfo.filename());
+	console.log(blobInfo.base64());console.log(url);
+        success('www.google.com');
+    },*/
+//    images_upload_url: "/ondrop",
+    urlconverter_callback : "myCustomURLConverter",
+    setup : function(ed) {
+        ed.on('drop',function() {
+	  console.log("dropped");
+	  var url = ed.convertURL("media/photos/item.jpg", "src", "img");
+		
+	  //console.log(url);
+          ed.uploadImages(function() {
+	    console.log(ed.contentDocument.activeElement.childNodes[0]); 
+	    //console.log(ed.contentDocument.activeElement.childNodes[0].childNodes[0].alt);
+	    
+	    
+// 	    var id = ed.id;
+//	    console.log(ed.dom);
+//	    console.log(ed.$.html());
+//	    console.log(ed.getContainer().find('iframe').attr('class'));
+//	    console.log(ed.getElement().find('iframe').attr('class'));
+//	    console.log(ed.getContentAreaContainer());
+//	    console.log(ed.getWin().html());
+          });
+      });
     }
-
 });
-//alert(tinyMCE.EditorManager.editors);
 
+function myCustomURLConverter(url, node, on_save, name){
+console.log('myCustomURLConverter');
+console.log(url);
+console.log(node);
+console.log(name);
+url="media/photos/item.jpg";
+return url;
+};
 
   </script>
 
