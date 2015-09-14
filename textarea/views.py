@@ -74,5 +74,5 @@ def upload(request):
 
 def ondrop(request):
     print "ondropeddddd"
-    print request
+    #print request
     return HttpResponse("<script>alert('123');</script>")
