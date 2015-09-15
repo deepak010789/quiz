@@ -39,78 +39,68 @@
 //    autoresize_max_height: 400, 
     browser_spellcheck : true, 
     paste_as_text: true,
-    images_upload_handler: function (blobInfo, success, failure) {
-        console.log(blobInfo.blob());console.log(blobInfo.filename());
-	console.log(blobInfo.base64());console.log(url);
-        //success('www.google.com');
-    }, 
-    editor_selector : "tinymce",
-    images_upload_url: "/ondrop",
-    urlconverter_callback : "myCustomURLConverter",
+//    auto_focus: "id_describe",
+//    autofocus: true,
+//    init_instance_callback : function(ed) {                                                   
+//     console.log(ed.dom.doc.childNodes[1].childNodes[1].childNodes[0].childNodes[0]);
+//    },
+//    images_upload_handler: function (blobInfo, success, failure) {
+//        console.log(blobInfo.blob());console.log(blobInfo.filename());
+//	console.log(blobInfo.base64());console.log(url);
+//    }, 
+//    editor_selector : "tinymce",
+//    images_upload_url: "/ondrop",
+//    urlconverter_callback : "myCustomURLConverter",
     setup : function(ed) {
-
         ed.on('drop',function() {
-	  console.log("dropped");
+	  console.log(ed.id);
+	  console.log(ed.dom.doc.childNodes[1].childNodes[1].childNodes[0].childNodes[0]);
+
 	  var url = ed.convertURL("media/photos/item.jpg", "src", "img");
-ed.on('LoadContent', function(e) {
-	    var nodee = ed.contentDocument.activeElement.childNodes[0];
-            console.log(nodee.innerHTML);
-        });
+
           ed.uploadImages(function() {
 	    var node = ed.contentDocument.activeElement.childNodes[0];
-	    //var ed1 = new tinymce.Editor('tinymce');
-	    var node2 = ed.getContent();
 	    console.log(url);
-	    console.log(node2); 
-	  var res = ed.load();
-	  console.log(res);
-	  var res1 = ed.save();
-	  console.log(res1);
-	  //get_editor_content();
-	    $.ajax({
-                url: "/ondrop",
-                type: "GET",
-                contentType: false,
-		data: node,
-                cache: false,
-                processData:false,
-                success: function(data)
-                {
-                    console.log("hehehe");
-		    var node1 = update();
-		    console.log(node1.innerHTML);
-		    //var aa = node.find('img').attr('src');
-		    //console.log(aa);
-                },
-                error: function() 
-                {
-                }           
-            });
+	    
 
           });
       });
-	var update = function() {
-		console.log("update called");
-  		return ed.contentDocument.activeElement.childNodes[0];
-	    };
+
+      ed.on('focus', function(){
+	var data = tinyMCE.activeEditor.getContent();
+	console.log(data);
+	$.ajax({
+                url: "/ondrop",
+                type: "GET",
+                contentType: false,
+		data: data,
+                cache: false,
+                processData:false,
+//		datatype:"image/jpg",
+                success: function(res)
+                {
+		    var response = JSON.parse(res);
+		    ed.contentDocument.activeElement.childNodes[0].childNodes[0].src = response.location;
+		    console.log(ed.contentDocument.activeElement.childNodes[0].childNodes[0]);
+                },
+        });
+      });
+
     }
 });
 
-function get_editor_content() {
-  console.log(tinymce.get('id_describe').getContent());
-};
+  </script>
 
+  <script>
 function myCustomURLConverter(url, node, on_save, name){
-console.log('myCustomURLConverter');
-console.log(url);
-console.log(node);
-console.log(name);
-url="media/photos/item.jpg";
-console.log("urrrrrl");
-//alert("myCustomURLConverter");
-return url;
+	console.log('myCustomURLConverter');
+	console.log(url);
+	console.log(node);
+	console.log(name);
+	url="media/photos/item.jpg";
+	console.log("urrrrrl");
+	return url;
 };
-
   </script>
 
   </head>

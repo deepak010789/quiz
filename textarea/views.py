@@ -11,7 +11,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import os
 from django.conf import settings
-print settings.MEDIA_URL
+import json
 
 def index(request):
 #    return HttpResponse("Hello, world. You're at the polls index.")
@@ -73,6 +73,22 @@ def upload(request):
     return HttpResponse("<script>alert('%s');</script>" % escapejs('\n'.join([v[0] for k, v in form.errors.items()])))
 
 def ondrop(request):
-    print "ondropeddddd"
+    print "ondropeddddd --------------------------------"
     #print request
-    return HttpResponse("<script>alert('123');</script>")
+    data = request.GET.keys()[0].split(',')[1] + "=="
+    data = data.replace(" ", "+")
+    print data
+    #data2 = request.GET.values()[1]
+    #data = data2 + ";" + data1
+    
+    url = "/home/hadoolytics-deepak/workspace/tinymce/quiz/quiz/media/photos/item1.png" 
+    file = open(url,"wb")
+    print 1
+    file.write(data.decode('base64'))
+    file.close()
+    print 2
+    final = {"location": "media/photos/item1.png"}
+    print 3
+    js_data = json.dumps(final)
+    print js_data
+    return HttpResponse(js_data)
